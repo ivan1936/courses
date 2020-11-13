@@ -1,0 +1,6 @@
+<app-course-form
+  [initialValues]="initialValues"
+  [isSubmitting]="isSubmitting$ | async"
+  [errors]="backendErrors$ | async"
+  (courseSubmit)="onSubmit($event)"
+></app-course-form>

@@ -1,0 +1,50 @@
+<div fxLayout="column" fxLayoutAlign="space-between center">
+  <app-loading fxFlexAlign="start" *ngIf="isLoading$ | async"></app-loading>
+
+  <app-error-message *ngIf="error$ | async"></app-error-message>
+
+  <mat-card fxLayout="column" fxLayoutAlign="center start">
+    <mat-card-title class="mat-h2">
+      Courses
+    </mat-card-title>
+
+    <mat-card-content class="content"  fxLayout="column" fxLayoutGap="15px">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row">
+          <input matInput
+            class="h-smal" 
+            type="text" 
+            placeholder="Search course..." 
+            [(ngModel)]="inputValue"
+            (keyup)="onKey($event)"          
+          />        
+          <button mat-button class="btn-search" 
+            (click)='onClick()'>
+              Search
+          </button>
+        </div>
+          
+        <a mat-raised-button [routerLink]="['/courses/new']">
+          <mat-icon>add</mat-icon>            
+          Add Course
+        </a>     
+      </div>
+      <div *ngIf="courses$ | async" fxLayout="column" fxLayoutAlign="center none" fxLayoutGap="10px">
+        <mat-list
+          *ngFor="let course of courses$ | async | searchCourses: searchStr"
+        >
+          <app-item-list [course]="course"></app-item-list>          
+        </mat-list>
+      </div>
+    </mat-card-content>
+
+    <mat-card class="btn-padding">
+      <button mat-button class="content" [disabled]="allCoursesLoaded$ | async"
+        (click)="loadMoreCourses()"
+      >Read More</button>
+    </mat-card>
+  </mat-card>
+</div>
+
+
+

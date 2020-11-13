@@ -1,0 +1,18 @@
+<mat-card>
+  <mat-toolbar fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between"
+  >
+    <div>
+      <mat-icon>home</mat-icon>
+      <a mat-button [routerLink]="['/']"> Logo </a>
+    </div>
+    <div>
+      <ng-container *ngIf="isLoggedIn$ | async">
+        <button mat-button (click)="logout()"> Log Off </button>
+      </ng-container>
+
+      <ng-container *ngIf="isAnonymous$ | async">
+        <a mat-button [routerLink]="['/login']"> Sign in </a>
+      </ng-container>
+    </div>
+  </mat-toolbar>
+</mat-card>

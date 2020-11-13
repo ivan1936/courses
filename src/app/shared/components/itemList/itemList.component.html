@@ -1,0 +1,29 @@
+<mat-card class="item-list" fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px"
+  [routerLink]="['/courses', course.id]"
+>
+  <div fxLayout="column" fxLayoutAlign="space-between stretch">
+    <div class="mat-subheading-2" fxLayout="row" fxLayoutAlign="space-between none">
+      <div>{{ course.title }}</div>
+      <div fxLayout fxLayoutGap="20px">
+        <span>{{ course.duration | durationTrans }}</span>
+        <span>{{ course.date }}</span>
+      </div>        
+    </div>
+    <div>
+      {{ course.description }}
+    </div>
+  </div>  
+      
+  <div fxLayout="column" fxLayoutGap="3px">
+    <button mat-stroked-button [routerLink]="['/courses', course.id, 'edit']">
+      <mat-icon>edit</mat-icon>
+      Edit Course
+    </button>
+    <button mat-stroked-button
+      (click)="deleteCourse(course.id)"
+    >
+      <mat-icon>delete</mat-icon>
+      Delete Course
+    </button>
+  </div>         
+</mat-card>
